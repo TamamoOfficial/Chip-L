@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <LangVersion>latest</LangVersion>
+    <AssemblyName>ChipL</AssemblyName>
+    <RootNamespace>ChipL</RootNamespace>
+    <ApplicationIcon>app.ico</ApplicationIcon>
+    <Version>1.0.0</Version>
+    <Product>Chip-L 桌面版</Product>
+    <Company>Chip-L Desktop</Company>
+    <SatelliteResourceLanguages>zh-Hans</SatelliteResourceLanguages>
+    <InvariantGlobalization>false</InvariantGlobalization>
+    <EnableWindowsTargeting>true</EnableWindowsTargeting>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="..\db\gz\cpus_db.gz" LogicalName="db.cpus.gz" />
+    <EmbeddedResource Include="..\db\gz\gpus_db.gz" LogicalName="db.gpus.gz" />
+    <EmbeddedResource Include="..\db\gz\socs_db.gz" LogicalName="db.socs.gz" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="app.ico" />
+  </ItemGroup>
+
+</Project>

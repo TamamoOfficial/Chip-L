@@ -1,0 +1,68 @@
+<UserControl x:Class="ChipL.NavigationBar"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Background="Transparent">
+  <StackPanel>
+
+    <!-- 面包屑（可点击回退） -->
+    <DockPanel Margin="0,0,0,7">
+      <StackPanel Orientation="Horizontal">
+        <WrapPanel x:Name="CrumbPanel" Orientation="Horizontal" VerticalAlignment="Center" />
+        <Border Background="#FF223146" CornerRadius="9" Padding="6,1" Margin="6,0,0,0"
+                VerticalAlignment="Center">
+          <TextBlock x:Name="CountText" Text="0" FontSize="10" Foreground="#FF7FA8D8" />
+        </Border>
+      </StackPanel>
+    </DockPanel>
+
+    <!-- 当前层提示 -->
+    <TextBlock x:Name="LevelLabel" Text="制造商" FontSize="10" Foreground="#FF5E7089"
+               Margin="1,0,0,5" />
+
+    <!-- 逐级下钻的选项区：只显示当前一层。
+         选项多时限制最大高度并可滚动，避免挤占下方产品列表。 -->
+    <ScrollViewer x:Name="TabsScroller" MaxHeight="168"
+                  VerticalScrollBarVisibility="Auto"
+                  HorizontalScrollBarVisibility="Disabled"
+                  Padding="0,0,2,0">
+      <WrapPanel x:Name="TabsPanel" Orientation="Horizontal" Margin="0,0,0,2" />
+    </ScrollViewer>
+
+    <!-- 容器底部：清除（左） + 上一级（右），统一高亮样式 -->
+    <Border Background="#FF1A222D" BorderBrush="#FF2A3546" BorderThickness="1"
+            CornerRadius="8" Padding="6,5" Margin="0,7,0,0">
+      <Grid>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="*" />
+          <ColumnDefinition Width="6" />
+          <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Button Grid.Column="0" x:Name="ClearButton" Style="{StaticResource NavPillButton}"
+                Content="&#10005; 清除" Padding="10,4" Click="OnClear"
+                HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
+                ToolTip="清除当前筛选" Visibility="Collapsed" />
+
+        <Button Grid.Column="2" x:Name="BackButton" Style="{StaticResource NavPillButton}"
+                Content="&#8592; 上一级" Padding="10,4" Click="OnBackLevel"
+                HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
+                ToolTip="返回上一级" Visibility="Collapsed" />
+      </Grid>
+    </Border>
+
+    <!-- 隐藏占位：保留字段以免代码引用失效（不再显示） -->
+    <TextBlock x:Name="NextHintText" Text="" Visibility="Collapsed" />
+
+    <!-- 兼容旧字段的隐藏占位 -->
+    <StackPanel x:Name="CategoryRow" Visibility="Collapsed">
+      <WrapPanel x:Name="CategoryPanel" />
+    </StackPanel>
+    <StackPanel x:Name="ProductRow" Visibility="Collapsed">
+      <WrapPanel x:Name="ProductPanel" />
+    </StackPanel>
+    <StackPanel x:Name="SeriesRow" Visibility="Collapsed">
+      <WrapPanel x:Name="SeriesPanel" />
+    </StackPanel>
+
+  </StackPanel>
+</UserControl>
